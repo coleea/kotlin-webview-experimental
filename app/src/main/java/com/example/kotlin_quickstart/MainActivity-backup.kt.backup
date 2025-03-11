@@ -1,0 +1,62 @@
+package com.example.kotlin_quickstart
+
+import android.os.Bundle
+import android.webkit.WebView
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import com.example.kotlin_quickstart.ui.theme.KotlinquickstartTheme
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContentView(R.layout.activity_web_view)
+//        webView.loadUrl("https://www.google.com")
+
+        // 웹뷰 참조 가져오기
+        val webView = findViewById<WebView>(R.id.webView)
+
+        // 웹뷰 설정
+        val webSettings = webView.settings
+        webSettings.javaScriptEnabled = true
+
+        // URL 로드
+        webView.loadUrl("https://www.google.com")
+
+
+//        setContent {
+//            KotlinquickstartTheme {
+//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+//                    Greeting(
+//                        name = "Android",
+//                        modifier = Modifier.padding(innerPadding)
+//                    )
+//                }
+//            }
+//        }
+    }
+}
+
+@Composable
+fun Greeting(name: String, modifier: Modifier = Modifier) {
+    Text(
+        text = "123123 Hello $name!",
+        modifier = modifier
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun GreetingPreview() {
+    KotlinquickstartTheme {
+        Greeting("Android 11222233331")
+    }
+}
