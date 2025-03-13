@@ -1,9 +1,11 @@
 package com.example.kotlin_quickstart
+//import add
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.webkit.JavascriptInterface
 import android.webkit.WebView
+
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
@@ -16,11 +18,11 @@ class MainActivity : ComponentActivity() {
 
         val webView = findViewById<WebView>(R.id.webView)
         webView.settings.javaScriptEnabled = true ;
-//        val webSettings = webView.settings
-//        webSettings.javaScriptEnabled = true
 
         webView.addJavascriptInterface(WebAppInterface(this), "Android")
         webView.loadUrl("https://next-test-for-webview.vercel.app/test")
+
+        add(1,2)
     }
 }
 
@@ -41,9 +43,19 @@ class WebAppInterface(private val context: Context) {
     }
 
     @JavascriptInterface
-    fun sendDataToKotlin(data: String): String {
+    fun sendDataToKotlin(data: String): UserData {
         Log.d("WebAppInterface", "Data received from JavaScript: $data")
         // 데이터 처리 로직
-        return "코틀린에서 받은 데이터: $data"
+        return UserData("John", 30)
+//        return "코틀린에서 받은 데이터: $data"
     }
+
+    // 객체 반환 예시
+    @JavascriptInterface
+    fun getUserData(): UserData {
+        return UserData("John", 30)
+    }
+
+    // 데이터 클래스 정의
+    data class UserData(val name: String, val age: Int)
 }
